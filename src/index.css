@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-title: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at 10% 10%, #11404f 0%, transparent 32%),
+    radial-gradient(circle at 85% 20%, #0f6f5f 0%, transparent 26%),
+    linear-gradient(160deg, #051527 0%, #041017 46%, #081926 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.liquid-motion {
+  animation: liquid-spin 5.8s linear infinite;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s ease;
+}
+
+.animate-in {
+  animation: slide-in 0.42s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes liquid-spin {
+  0% {
+    border-radius: 40% 62% 63% 37% / 43% 41% 59% 57%;
+    rotate: 0deg;
+  }
+
+  50% {
+    border-radius: 62% 38% 32% 68% / 52% 61% 39% 48%;
+  }
+
+  100% {
+    border-radius: 40% 62% 63% 37% / 43% 41% 59% 57%;
+    rotate: 360deg;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
