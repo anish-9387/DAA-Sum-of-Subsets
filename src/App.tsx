@@ -5,26 +5,39 @@ import ItemsStrip from './components/ItemsStrip'
 import LiquidGauge from './components/LiquidGauge'
 import SolutionsList from './components/SolutionsList'
 
+type StatusClass = 'idle' | 'success' | 'danger'
+
+interface VizState {
+  currentSum: number
+  includedIndexes: number[]
+  consideringIndex: number
+  status: string
+  statusClass: StatusClass
+}
+
 const DEFAULT_ITEMS = '5, 10, 12, 13, 15, 18'
 const DEFAULT_TARGET = '30'
 
-function parseItems(text) {
+function parseItems(text: string): number[] {
   return text
     .split(',')
     .map((value) => Number(value.trim()))
     .filter((value) => Number.isFinite(value) && value > 0)
 }
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const sleep = (ms: number): Promise<void> =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
 
 function App() {
-  const [itemsInput, setItemsInput] = useState(DEFAULT_ITEMS)
-  const [targetInput, setTargetInput] = useState(DEFAULT_TARGET)
-  const [delayMs, setDelayMs] = useState(500)
-  const [running, setRunning] = useState(false)
-  const [complete, setComplete] = useState(false)
+  const [itemsInput, setItemsInput] = useState<string>(DEFAULT_ITEMS)
+  const [targetInput, setTargetInput] = useState<string>(DEFAULT_TARGET)
+  const [delayMs, setDelayMs] = useState<number>(500)
+  const [running, setRunning] = useState<boolean>(false)
+  const [complete, setComplete] = useState<boolean>(false)
 
-  const [vizState, setVizState] = useState({
+  const [vizState, setVizState] = useState<VizState>({
     currentSum: 0,
     includedIndexes: [],
     consideringIndex: -1,
@@ -32,15 +45,21 @@ function App() {
     statusClass: 'idle',
   })
 
-  const [solutions, setSolutions] = useState([])
-  const runningRef = useRef(false)
+  const [solutions, setSolutions] = useState<number[][]>([])
+  const runningRef = useRef<boolean>(false)
 
   const items = useMemo(() => parseItems(itemsInput), [itemsInput])
   const target = useMemo(() => Number(targetInput), [targetInput])
 
   const canSimulate = items.length > 0 && Number.isFinite(target) && target > 0
 
-  function updateViz(currentSum, subsetIndexes, consideringIndex, status, statusClass) {
+  function updateViz(
+    currentSum: number,
+    subsetIndexes: number[],
+    consideringIndex: number,
+    status: string,
+    statusClass: StatusClass,
+  ): void {
     setVizState({
       currentSum,
       includedIndexes: [...subsetIndexes],
@@ -50,7 +69,7 @@ function App() {
     })
   }
 
-  async function solve(k, currentSum, subsetIndexes) {
+  async function solve(k: number, currentSum: number, subsetIndexes: number[]): Promise<void> {
     if (!runningRef.current) {
       return
     }
@@ -86,7 +105,7 @@ function App() {
     await solve(k + 1, currentSum, subsetIndexes)
   }
 
-  async function handleStart() {
+  async function handleStart(): Promise<void> {
     if (running || !canSimulate) {
       return
     }
@@ -108,7 +127,7 @@ function App() {
     setRunning(false)
   }
 
-  function handleReset() {
+  function handleReset(): void {
     runningRef.current = false
     setRunning(false)
     setComplete(false)
@@ -116,13 +135,15 @@ function App() {
     updateViz(0, [], -1, 'Ready to compute.', 'idle')
   }
 
-  function handleRandomize() {
+  function handleRandomize(): void {
     if (running) {
       return
     }
 
-    const randomItems = Array.from({ length: 6 }, () => Math.floor(Math.random() * 18) + 3)
-      .sort((a, b) => a - b)
+    const randomItems = Array.from(
+      { length: 6 },
+      () => Math.floor(Math.random() * 18) + 3,
+    ).sort((a, b) => a - b)
     const randomTarget = Math.floor(Math.random() * 36) + 20
 
     setItemsInput(randomItems.join(', '))

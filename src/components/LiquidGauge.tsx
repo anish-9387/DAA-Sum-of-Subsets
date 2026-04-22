@@ -1,4 +1,18 @@
-function LiquidGauge({ currentSum, target, statusClass, complete }) {
+type GaugeStatusClass = 'idle' | 'success' | 'danger'
+
+interface LiquidGaugeProps {
+  currentSum: number
+  target: number
+  statusClass: GaugeStatusClass
+  complete: boolean
+}
+
+function LiquidGauge({
+  currentSum,
+  target,
+  statusClass,
+  complete,
+}: LiquidGaugeProps) {
   const fillPercent = Math.min((currentSum / Math.max(target, 1)) * 100, 120)
   const translateValue = 100 - fillPercent
 

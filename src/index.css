@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Sora', ui-sans-serif, system-ui, sans-serif;
-  --font-title: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-title: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {

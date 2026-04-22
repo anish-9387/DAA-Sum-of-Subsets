@@ -1,3 +1,17 @@
+interface ControlPanelProps {
+  itemsInput: string
+  targetInput: string
+  delayMs: number
+  disabled: boolean
+  canStart: boolean
+  onItemsInput: (value: string) => void
+  onTargetInput: (value: string) => void
+  onDelayChange: (value: number) => void
+  onStart: () => void
+  onReset: () => void
+  onRandomize: () => void
+}
+
 function ControlPanel({
   itemsInput,
   targetInput,
@@ -10,7 +24,7 @@ function ControlPanel({
   onStart,
   onReset,
   onRandomize,
-}) {
+}: ControlPanelProps) {
   return (
     <section className="rounded-3xl border border-white/15 bg-slate-950/60 p-5 shadow-[0_20px_60px_-30px_rgba(10,20,40,0.9)] backdrop-blur-xl sm:p-6">
       <div className="grid gap-4 sm:grid-cols-2">
@@ -56,7 +70,7 @@ function ControlPanel({
         <button
           onClick={onStart}
           disabled={disabled || !canStart}
-          className="rounded-xl bg-gradient-to-r from-teal-300 to-cyan-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+          className="rounded-xl bg-linear-to-r from-teal-300 to-cyan-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
         >
           Simulate Search
         </button>

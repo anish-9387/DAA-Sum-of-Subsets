@@ -1,16 +1,52 @@
-# React + Vite
+# Sum of Subsets Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive visualization of the Sum of Subsets backtracking algorithm.
 
-Currently, two official plugins are available:
+This project demonstrates how recursive search explores combinations, prunes invalid paths, and records valid subsets whose sum matches a target value.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Real-time backtracking simulation with include/exclude decisions
+- Branch pruning visualization when partial sums exceed the target
+- Animated liquid gauge for current sum progression
+- Live highlighted item strip for the active recursion path
+- Dynamic list of valid subsets found during traversal
+- Adjustable simulation speed and random scenario generator
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Locally
+
+1. Install dependencies:
+
+	```bash
+	npm install
+	```
+
+2. Start the development server:
+
+	```bash
+	npm run dev
+	```
+
+3. Build for production:
+
+	```bash
+	npm run build
+	```
+
+## How It Works
+
+Given a list of positive numbers and a target sum:
+
+1. The algorithm recursively decides whether to include each item.
+2. If the current sum equals the target, that subset is recorded.
+3. If the current sum exceeds the target, that branch is pruned.
+4. The visualization updates at each recursion step.
+
+This creates an intuitive view of classic backtracking behavior in action.

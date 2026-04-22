@@ -1,4 +1,8 @@
-function SolutionsList({ solutions }) {
+interface SolutionsListProps {
+  solutions: number[][]
+}
+
+function SolutionsList({ solutions }: SolutionsListProps) {
   return (
     <section className="rounded-3xl border border-white/15 bg-slate-950/60 p-5 shadow-[0_20px_60px_-30px_rgba(10,20,40,0.9)] backdrop-blur-xl sm:p-6">
       <div className="mb-4 flex items-end justify-between gap-3">
